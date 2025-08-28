@@ -5,13 +5,18 @@ metadata:
   namespace: argocd
 spec:
   project: platform
-  source:
-    repoURL: https://github.com/josefloressv/kcd_colombia_webapp_color.git
-    targetRevision: main
-    path: helm/webapp-color
-    helm:
-      valueFiles:
-        - values.eks.yaml   # usa el mismo archivo de valores que hoy usas con Helm
+  sources:
+    # 1) Fuente del CHART (repo de la app)
+    - repoURL: https://github.com/josefloressv/kcd_colombia_webapp_color.git
+      targetRevision: main
+      path: helm/webapp-color
+      helm:
+        valueFiles:
+          - $values/clusters/prod/apps/values/webapp-color.values.yaml
+    # 2) Fuente de los VALUES (repo de ambiente)
+    - repoURL: https://github.com/josefloressv/kcd_colombia_env.git
+      targetRevision: main
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: webapp-color
