@@ -12,7 +12,7 @@ spec:
       path: helm/webapp-color
       helm:
         valueFiles:
-          - $values/clusters/prod/apps/values/webapp-color.values.yaml
+          - $values/clusters/prod/apps/webapp-color.values.yaml
     # 2) Fuente de los VALUES (repo de ambiente)
     - repoURL: https://github.com/josefloressv/kcd_colombia_env.git
       targetRevision: main
