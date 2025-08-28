@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: webapp-color
+  namespace: argocd
+spec:
+  project: platform
+  source:
+    repoURL: https://github.com/josefloressv/kcd_colombia_webapp_color.git
+    targetRevision: main
+    path: helm/webapp-color
+    helm:
+      valueFiles:
+        - values.eks.yaml   # usa el mismo archivo de valores que hoy usas con Helm
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: webapp-color
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
