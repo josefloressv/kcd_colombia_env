@@ -1,6 +1,6 @@
 image:
   repository: 562802099288.dkr.ecr.us-east-1.amazonaws.com/webapp-color-prod
-  tag: f59a990
+  tag: 1.0.5
 service:
   type: ClusterIP
   port: 8080
